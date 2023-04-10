@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<title>Casa de Cambio</title>
+</head>
+<body>
+	<h1>Casa de Cambio</h1>
+	<form>
+		<label for="moneda_origen">Seleccionar moneda a cambiar:</label><br>
+		<input type="radio" id="dolar_origen" name="moneda_origen" value="dolares">
+		<label for="dolar_origen">Dólar</label><br>
+		<input type="radio" id="soles_origen" name="moneda_origen" value="soles">
+		<label for="soles_origen">Soles</label><br>
+		<input type="radio" id="euros_origen" name="moneda_origen" value="euros">
+		<label for="euros_origen">Euros</label><br>
+
+		<label for="moneda_destino">Seleccionar moneda a recibir:</label><br>
+		<input type="radio" id="dolar_destino" name="moneda_destino" value="dolares">
+		<label for="dolar_destino">Dólar</label><br>
+		<input type="radio" id="soles_destino" name="moneda_destino" value="soles">
+		<label for="soles_destino">Soles</label><br>
+		<input type="radio" id="euros_destino" name="moneda_destino" value="euros">
+		<label for="euros_destino">Euros</label><br>
+
+		<label for="monto">Ingrese Monto:</label>
+		<input type="text" id="monto" name="monto"><br>
+
+		<input type="button" value="Cotizar" onclick="calcularCambio()">
+	</form>
+
+	<script>
+		function calcularCambio() {
+			// Obtener los valores seleccionados y el monto ingresado
+			var monedaOrigen = document.querySelector('input[name="moneda_origen"]:checked').value;
+			var monedaDestino = document.querySelector('input[name="moneda_destino"]:checked').value;
+			var monto = parseFloat(document.getElementById("monto").value);
+
+			// Calcular el total a recibir
+			var tasaCambio = 1;
+			if (monedaOrigen == "dolares" && monedaDestino == "soles") {
+				tasaCambio = 4.0;
+			} else if (monedaOrigen == "dolares" && monedaDestino == "euros") {
+				tasaCambio = 0.85;
+			} else if (monedaOrigen == "soles" && monedaDestino == "dolares") {
+				tasaCambio = 0.25;
+			} else if (monedaOrigen == "soles" && monedaDestino == "euros") {
+				tasaCambio = 0.21;
+			} else if (monedaOrigen == "euros" && monedaDestino == "dolares") {
+				tasaCambio = 1.18;
+			} else if (monedaOrigen == "euros" && monedaDestino == "soles") {
+				tasaCambio = 4.84;
+			}
+
+			//var totalRecibir = monto * tasaCambio;
+
+			var totalRecibir = monto * tasaCambio; 
+
+			// Mostrar el total a recibir en una alerta
+			alert("Total a recibir: " + totalRecibir + " " + monedaDestino.toUpperCase());
+		}
+	</script>
+</body>
+</html>
